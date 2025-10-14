@@ -517,6 +517,25 @@ export default function App() {
                         </div>
                       </div>
                     </div>
+                    
+                    {/* Live Dashboard Link */}
+                    <div className="mt-6">
+                      <div className="bg-primary/10 p-4 rounded-lg border border-primary/20 text-center">
+                        <h4 className="mb-2 text-primary">🔗 Experience the Live Dashboard</h4>
+                        <p className="text-muted-foreground text-sm mb-3">
+                          Interact with real-time cryptocurrency data and explore all the features described above.
+                        </p>
+                        <a 
+                          href="https://rajatpalsinghsodhi.github.io/dynamicclone/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+                        >
+                          View Live Dashboard
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </CardContent>
