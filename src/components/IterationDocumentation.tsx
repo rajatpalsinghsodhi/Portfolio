@@ -787,6 +787,22 @@ export function IterationDocumentation() {
                   data and intuitive design.
                 </p>
               </div>
+
+              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 text-center">
+                <h5 className="mb-2 text-primary">🔗 Experience the Live Dashboard</h5>
+                <p className="text-muted-foreground text-sm mb-3">
+                  Interact with real-time cryptocurrency data and explore the full functionality.
+                </p>
+                <a 
+                  href="https://rajatpalsinghsodhi.github.io/dynamicclone/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+                >
+                  View Live Dashboard
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </CardContent>
