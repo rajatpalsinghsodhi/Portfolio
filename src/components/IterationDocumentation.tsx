@@ -662,17 +662,17 @@ export function IterationDocumentation() {
         <CardContent className="space-y-6">
           {/* Live Link */}
           <div className="bg-primary/10 p-6 rounded-lg border border-primary/30 text-center">
-            <h4 className="mb-3 text-primary">🔗 Experience the Live Dashboard</h4>
+            <h4 className="mb-3 text-primary">🔗 View Complete Portfolio</h4>
             <p className="text-muted-foreground mb-4">
-              Explore the fully functional cryptocurrency price tracker and interact with real-time data.
+              Explore the complete portfolio showcasing this cryptocurrency price tracker project and more.
             </p>
             <a 
-              href="https://public--main--cryptocurrencytracker--sodhraja.ixdcoder.com/" 
+              href="https://rajatpalsinghsodhi.github.io/Portfolio/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
             >
-              View Live Visualization
+              View Portfolio
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
