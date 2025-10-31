@@ -13,7 +13,7 @@ import { IterationDocumentation } from "./components/IterationDocumentation";
 import { Citations } from "./components/Citations";
 import D31 from "./imports/D31";
 import Frame85 from "./imports/Frame85";
-import { Menu, X, Mail, Linkedin, ArrowRight, Lightbulb, Users, Palette, TrendingUp, BarChart3, RefreshCw, Smartphone, ChevronDown, ChevronUp } from "lucide-react";
+import { Menu, X, Mail, Linkedin, ArrowRight, Lightbulb, Users, Palette, TrendingUp, BarChart3, RefreshCw, Smartphone, ChevronDown, ChevronUp, Search, Film, Sparkles, Globe } from "lucide-react";
 import { motion } from "motion/react";
 import cryptoImage1 from "figma:asset/c9339c3ec67882a71f5353a9c36e1cae23408dcc.png";
 import cryptoDetailView from "figma:asset/45a93cfd776fce778c7aea2c5f5af85770800dca.png";
@@ -30,10 +30,12 @@ import moodboard2 from "figma:asset/21e4efc7b877fa403826f54e380d7618e47a74ec.png
 import moodboard3 from "figma:asset/2386ceab0de3a2aea460ebe9be6058f516d31afe.png";
 import moodboard4 from "figma:asset/abbc836bf404629aa5099c6287f593561da3b675.png";
 import profilePhoto from "figma:asset/9acbba2f44a1f99786c2e7cd5b80c5130593c9b7.png";
+import anitrendMain from "./assets/anitrend-main.png";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showProcessDetail, setShowProcessDetail] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [showPipelineDetails, setShowPipelineDetails] = useState(false);
   const [showIterationDetails, setShowIterationDetails] = useState(false);
   const pipelineRef = useRef<HTMLDivElement>(null);
@@ -69,7 +71,8 @@ export default function App() {
     }
   };
 
-  const handleViewProcess = () => {
+  const handleViewProcess = (projectTitle: string) => {
+    setSelectedProject(projectTitle);
     setShowProcessDetail(true);
     setTimeout(() => {
       scrollToSection("process");
@@ -87,13 +90,13 @@ export default function App() {
       hasProcess: true
     },
     {
-      title: "MediConnect - Healthcare Portal",
-      description: "A redesign of a patient portal interface to improve accessibility and streamline the appointment booking process for users of all ages and technical abilities.",
-      role: "Interaction Designer",
-      duration: "6 weeks",
-      tools: ["Sketch", "InVision", "UserTesting", "Illustrator"],
-      image: "https://images.unsplash.com/photo-1560461396-ec0ef7bb29dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBzeXN0ZW18ZW58MXx8fHwxNzYwMjkzMjI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      hasProcess: false
+      title: "AniTrend: Anime Discovery & Scene Finder",
+      description: "A powerful, user-friendly web application that merges two core experiences for anime fans: Trend Exploration and Scene Identification. Discover what's popular in anime and pinpoint specific scenes from screenshots or clips.",
+      role: "UX/UI Designer & Developer",
+      duration: "8 weeks",
+      tools: ["D3.js", "React", "trace.moe API", "Jikan API", "AniList API", "Cursor AI"],
+      image: anitrendMain,
+      hasProcess: true
     }
   ];
 
@@ -347,7 +350,7 @@ export default function App() {
                 key={project.title} 
                 {...project}
                 index={index}
-                onViewDetails={project.hasProcess ? handleViewProcess : undefined}
+                onViewDetails={project.hasProcess ? () => handleViewProcess(project.title) : undefined}
               />
             ))}
             
@@ -394,19 +397,22 @@ export default function App() {
       {showProcessDetail && (
         <section id="process" className="py-20 px-4 bg-muted/30">
           <div className="container mx-auto max-w-5xl">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4">Project Process: Cryptocurrency Price Tracker</h2>
-              <p className="text-muted-foreground max-w-3xl mx-auto">
-                A real-time cryptocurrency dashboard providing interactive market data, price tracking, 
-                and volume analysis. Built for both casual viewers and crypto enthusiasts.
-              </p>
-              <div className="flex gap-2 justify-center mt-6 flex-wrap">
-                <Badge variant="secondary" className="px-3 py-1">Cryptocurrency</Badge>
-                <Badge variant="secondary" className="px-3 py-1">Real-time Data</Badge>
-                <Badge variant="secondary" className="px-3 py-1">Interactive Charts</Badge>
-                <Badge variant="secondary" className="px-3 py-1">D3.js</Badge>
-              </div>
-            </div>
+            {/* Cryptocurrency Price Tracker Detail View */}
+            {selectedProject === "Cryptocurrency Price Tracker" && (
+              <>
+                <div className="mb-12 text-center">
+                  <h2 className="mb-4">Project Process: Cryptocurrency Price Tracker</h2>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">
+                    A real-time cryptocurrency dashboard providing interactive market data, price tracking, 
+                    and volume analysis. Built for both casual viewers and crypto enthusiasts.
+                  </p>
+                  <div className="flex gap-2 justify-center mt-6 flex-wrap">
+                    <Badge variant="secondary" className="px-3 py-1">Cryptocurrency</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">Real-time Data</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">Interactive Charts</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">D3.js</Badge>
+                  </div>
+                </div>
 
             {/* Project Overview */}
             <Card className="mb-8">
@@ -1066,6 +1072,330 @@ export default function App() {
             <div className="mt-8">
               <Citations />
             </div>
+              </>
+            )}
+
+            {/* AniTrend Detail View */}
+            {selectedProject === "AniTrend: Anime Discovery & Scene Finder" && (
+              <>
+                <div className="mb-12 text-center">
+                  <h2 className="mb-4">Project Process: AniTrend</h2>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">
+                    A powerful web application that merges trend exploration and scene identification for anime fans. 
+                    Discover what's popular in anime and pinpoint specific scenes from screenshots or clips.
+                  </p>
+                  <div className="flex gap-2 justify-center mt-6 flex-wrap">
+                    <Badge variant="secondary" className="px-3 py-1">Anime</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">Data Visualization</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">Scene Recognition</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">D3.js</Badge>
+                    <Badge variant="secondary" className="px-3 py-1">API Integration</Badge>
+                  </div>
+                </div>
+
+            {/* Project Overview */}
+            <Card className="mb-8">
+              <CardContent className="pt-6">
+                <h3 className="mb-6">Project Overview</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="mb-3">Key Features</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <TrendingUp className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p><strong>Anime Trends Explorer</strong></p>
+                          <p className="text-muted-foreground">Explore trending anime by season and year with interactive visualizations</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Search className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p><strong>Scene Finder</strong></p>
+                          <p className="text-muted-foreground">Upload images or paste URLs to identify anime scenes with precise episode and timestamp</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <BarChart3 className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p><strong>Interactive Visualizations</strong></p>
+                          <p className="text-muted-foreground">Popularity bar charts and genre distribution donut charts with D3.js</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Smartphone className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p><strong>Responsive Design</strong></p>
+                          <p className="text-muted-foreground">Optimized for desktop, tablet, and mobile devices</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="mb-3">Who It's For</h4>
+                    <ul className="list-disc list-outside space-y-2 text-muted-foreground pl-5">
+                      <li>Casual viewers looking to explore seasonal trends</li>
+                      <li>Hardcore fans trying to identify specific scenes</li>
+                      <li>Content creators who need fast, reliable anime references</li>
+                      <li>Anime enthusiasts interested in market data visualization</li>
+                    </ul>
+                    <div className="mt-6">
+                      <h4 className="mb-3">Built With</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {/* D3.js */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <div className="w-5 h-5 flex-shrink-0 relative">
+                            <svg className="absolute inset-0 size-full" viewBox="0 0 213 213" fill="none">
+                              <path d="M1 17V195.448H179.448L1 17Z" fill="url(#d3-paint0)" />
+                              <path d="M17.6552 195.448V17L196.103 195.448H17.6552Z" fill="url(#d3-paint1)" />
+                              <path d="M17.6552 17L196.103 195.448" stroke="url(#d3-paint2)" strokeWidth="47.5862" />
+                              <defs>
+                                <linearGradient id="d3-paint0" x1="81.3017" x2="106.879" y1="115.741" y2="141.319" gradientUnits="userSpaceOnUse">
+                                  <stop stopColor="#F9A03C" />
+                                  <stop offset="1" stopColor="#F7974E" />
+                                </linearGradient>
+                                <linearGradient id="d3-paint1" x1="103.905" x2="141.379" y1="71.7242" y2="109.198" gradientUnits="userSpaceOnUse">
+                                  <stop stopColor="#B84E51" />
+                                  <stop offset="1" stopColor="#F68E48" />
+                                </linearGradient>
+                                <linearGradient id="d3-paint2" x1="78.3276" x2="128.888" y1="76.4828" y2="127.638" gradientUnits="userSpaceOnUse">
+                                  <stop stopColor="#F26D58" />
+                                  <stop offset="1" stopColor="#F9A03C" />
+                                </linearGradient>
+                              </defs>
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium">D3.js</span>
+                        </div>
+                        
+                        {/* React */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <svg width="20" height="20" viewBox="0 0 256 228" fill="none">
+                            <path d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621 6.238-30.281 2.16-54.676-11.769-62.708-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848 155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233 50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165 167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266 13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923 168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586 13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488 29.348-9.723 48.443-25.443 48.443-41.52 0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345-3.24-10.257-7.612-21.163-12.963-32.432 5.106-11 9.31-21.767 12.459-31.957 2.619.758 5.16 1.557 7.61 2.4 23.69 8.156 38.14 20.213 38.14 29.504 0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787-1.524 8.219-4.59 13.698-8.382 15.893-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246 12.376-1.098 24.068-2.894 34.671-5.345.522 2.107.986 4.173 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994 7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863-6.35-5.437-9.555-10.836-9.555-15.216 0-9.322 13.897-21.212 37.076-29.293 2.813-.98 5.757-1.905 8.812-2.773 3.204 10.42 7.406 21.315 12.477 32.332-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789 8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152 7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793 2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433 4.902.192 9.899.29 14.978.29 5.218 0 10.376-.117 15.453-.343-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026 347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815 329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627 310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695 358.489 358.489 0 0 1 11.036 20.54 329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026-.344 1.668-.73 3.367-1.15 5.09-10.622-2.452-22.155-4.275-34.23-5.408-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86-22.86-10.235-22.86-22.86 10.235-22.86 22.86-22.86Z" fill="#00D8FF"/>
+                          </svg>
+                          <span className="text-sm font-medium">React</span>
+                        </div>
+                        
+                        {/* trace.moe API */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <Globe className="w-5 h-5 text-primary" />
+                          <span className="text-sm font-medium">trace.moe API</span>
+                        </div>
+                        
+                        {/* Jikan API */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <Globe className="w-5 h-5 text-primary" />
+                          <span className="text-sm font-medium">Jikan API</span>
+                        </div>
+                        
+                        {/* AniList API */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <Globe className="w-5 h-5 text-primary" />
+                          <span className="text-sm font-medium">AniList API</span>
+                        </div>
+
+                        {/* Cursor AI */}
+                        <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
+                          <Sparkles className="w-5 h-5 text-primary" />
+                          <span className="text-sm font-medium">Cursor AI</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Key Features Section */}
+            <Card className="mb-8">
+              <CardContent className="pt-6">
+                <h3 className="mb-6">Core Features</h3>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="mb-3 flex items-center gap-2">
+                      <TrendingUp className="w-5 h-5 text-primary" />
+                      Anime Trends Explorer
+                    </h4>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <p className="font-medium">Seasonal Insights</p>
+                      <p className="text-muted-foreground text-sm">Explore trending anime by season and year with dynamic filters for Winter, Spring, Summer, and Fall.</p>
+                      
+                      <p className="font-medium mt-3">Interactive Visualizations</p>
+                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                        <li><strong>Popularity Bar Chart:</strong> Shows top anime by fan engagement with animated, gradient-filled bars</li>
+                        <li><strong>Genre Donut Chart:</strong> Reveals dominant genres with hover interactions and dynamic legends</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="mb-3 flex items-center gap-2">
+                      <Search className="w-5 h-5 text-primary" />
+                      Scene Finder
+                    </h4>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <p className="font-medium">Image Recognition</p>
+                      <p className="text-muted-foreground text-sm">Upload an image or paste a URL to identify which anime a scene is from using trace.moe API.</p>
+                      
+                      <p className="font-medium mt-3">Precise Results</p>
+                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                        <li>Exact episode number and timestamp</li>
+                        <li>Similarity percentage indicating match confidence</li>
+                        <li>Video preview of the matched scene</li>
+                        <li>Rich metadata: rating, rank, popularity, airing status, duration</li>
+                        <li>Character grid with images and roles</li>
+                        <li>Similar anime recommendations with tags</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="mb-3 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-primary" />
+                      Technical Highlights
+                    </h4>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                        <li><strong>trace.moe API:</strong> Accurate scene detection with episode and timestamp matching</li>
+                        <li><strong>Jikan API:</strong> Comprehensive anime metadata including ratings, characters, and recommendations</li>
+                        <li><strong>AniList GraphQL API:</strong> Seasonal anime data for trends visualization</li>
+                        <li><strong>D3.js Visualizations:</strong> Responsive bar charts and donut charts with smooth animations</li>
+                        <li><strong>Fully Responsive:</strong> Adapts seamlessly to desktop, tablet, and mobile devices</li>
+                        <li><strong>Cursor AI Integration:</strong> Development support, real-time code suggestions, and debugging assistance</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Process Steps */}
+            <ProcessStep 
+              title="1. Project Concept & Research"
+              description="AniTrend was designed as a speculative web application to enhance anime discovery through real-time data visualization and scene identification. I researched existing anime platforms, analyzed user needs through persona development (Kaito - an anime enthusiast), and created a comprehensive user journey map focusing on quick discovery, visual clarity, and mobile access."
+              content={
+                <div className="space-y-6">
+                  <DeviceMockup src={anitrendMain} alt="AniTrend main interface" device="laptop" />
+                  <div className="bg-muted/50 p-6 rounded-lg">
+                    <h4 className="mb-2">Key User Insights:</h4>
+                    <ul className="list-disc list-outside space-y-2 text-muted-foreground pl-5">
+                      <li>Users want quick access to trending anime without information overload</li>
+                      <li>Scene identification helps content creators and fans find specific moments</li>
+                      <li>Visual data representation makes trend exploration more engaging</li>
+                      <li>Mobile-first design is crucial for on-the-go discovery</li>
+                    </ul>
+                  </div>
+                </div>
+              }
+            />
+
+            <ProcessStep 
+              title="2. API Integration & Data Pipeline"
+              description="Developed a robust data pipeline integrating three key APIs: trace.moe for scene identification, Jikan (MyAnimeList) for detailed metadata, and AniList GraphQL for seasonal trend data. Each API serves a specific purpose, creating a comprehensive anime discovery experience."
+              content={
+                <div className="space-y-4">
+                  <div className="bg-muted/50 p-6 rounded-lg">
+                    <h4 className="mb-3">API Architecture</h4>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <h5 className="font-medium mb-2">trace.moe API</h5>
+                        <p className="text-sm text-muted-foreground">Handles image upload/URL processing and returns anime title, episode, timestamp, and similarity score.</p>
+                      </div>
+                      <div>
+                        <h5 className="font-medium mb-2">Jikan API</h5>
+                        <p className="text-sm text-muted-foreground">Fetches comprehensive anime information including ratings, characters with images, and similar anime recommendations.</p>
+                      </div>
+                      <div>
+                        <h5 className="font-medium mb-2">AniList GraphQL</h5>
+                        <p className="text-sm text-muted-foreground">Provides seasonal anime data with popularity metrics and genre information for trend visualization.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
+
+            <ProcessStep 
+              title="3. Data Visualization Development"
+              description="Built two interactive D3.js visualizations for the Trends Explorer. The horizontal bar chart displays anime popularity rankings with animated transitions, gradient-filled bars, and tooltips. The donut chart shows genre distribution with expandable segments on hover, dynamic legends, and center total counts."
+              content={
+                <div className="space-y-4">
+                  <div className="bg-muted/50 p-6 rounded-lg">
+                    <h4 className="mb-3">Visualization Features</h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="font-medium mb-2">Popularity Bar Chart</h5>
+                        <ul className="list-disc list-outside space-y-1 text-sm text-muted-foreground pl-5">
+                          <li>Animated gradient-filled bars</li>
+                          <li>Smooth transitions on data updates</li>
+                          <li>Interactive tooltips with title, rank, score, and genres</li>
+                          <li>Value labels at bar ends</li>
+                          <li>Fully responsive design</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="font-medium mb-2">Genre Donut Chart</h5>
+                        <ul className="list-disc list-outside space-y-1 text-sm text-muted-foreground pl-5">
+                          <li>Custom color scheme per genre</li>
+                          <li>Hover expansion for segments</li>
+                          <li>Tooltips with genre name, count, and percentage</li>
+                          <li>Dynamic center total display</li>
+                          <li>Comprehensive legend below chart</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
+
+            <ProcessStep 
+              title="4. User Experience & Responsive Design"
+              description="Focused on creating a clean, intuitive interface that works seamlessly across all devices. Implemented smooth animations, intuitive transitions, and external integrations with MyAnimeList and AniList for deeper exploration."
+              content={
+                <div className="space-y-4">
+                  <div className="bg-muted/50 p-6 rounded-lg">
+                    <h4 className="mb-3">UX Principles Applied</h4>
+                    <ul className="list-disc list-outside space-y-2 text-muted-foreground pl-5">
+                      <li><strong>Clean Layout:</strong> Modern interface with smooth animations and transitions</li>
+                      <li><strong>Responsive Design:</strong> Optimized for desktop, tablet, and mobile devices</li>
+                      <li><strong>External Integration:</strong> Direct links to MyAnimeList and AniList for deeper exploration</li>
+                      <li><strong>Visual Hierarchy:</strong> Clear information architecture for easy navigation</li>
+                      <li><strong>Accessibility:</strong> Keyboard navigation and screen reader support</li>
+                    </ul>
+                  </div>
+                </div>
+              }
+            />
+
+            {/* Outcomes */}
+            <Card className="bg-primary/5 border-primary/20">
+              <CardContent className="pt-6">
+                <h3 className="mb-4">Outcomes & Impact</h3>
+                <p className="mb-4 text-muted-foreground">
+                  AniTrend successfully demonstrates the value of combining data visualization, API integration, 
+                  and user-centered design to create an engaging tool for anime fans. The project showcases 
+                  technical skills in D3.js, React, and API development while maintaining a focus on user 
+                  experience and accessibility.
+                </p>
+                <p className="text-muted-foreground">
+                  This project deepened my understanding of data visualization principles, API architecture, 
+                  and responsive design. Working with Cursor AI provided valuable insights into AI-assisted 
+                  development workflows. The combination of trend exploration and scene identification creates 
+                  a unique value proposition for anime enthusiasts and content creators alike.
+                </p>
+              </CardContent>
+            </Card>
+              </>
+            )}
           </div>
         </section>
       )}
