@@ -24,24 +24,47 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
         {images && images.length > 0 && (
           <div className="mb-6 space-y-4">
             {images.map((image, index) => {
-              // Check if image is marked as long (contains "long" in filename or is anitrend-long-screenshot)
-              const isLongImage = image.includes('long-screenshot') || image.includes('long');
+              // Check if image is marked as long (contains "long" or "long-screenshot" in path/filename)
+              // Also check for common patterns in built assets (hashed filenames)
+              const imageStr = String(image);
+              const isLongImage = imageStr.toLowerCase().includes('long-screenshot') || 
+                                  imageStr.toLowerCase().includes('longscreenshot') ||
+                                  imageStr.toLowerCase().includes('anitrend-long');
               // Check if image is an icon/tool (contains "tool" in path/filename)
-              const isIcon = image.includes('tool') || image.includes('icon') || image.includes('-tool');
+              const isIcon = imageStr.toLowerCase().includes('tool') || 
+                           imageStr.toLowerCase().includes('icon') || 
+                           imageStr.toLowerCase().includes('-tool');
               
               // For long images, render in full-width scrollable container
               if (isLongImage) {
                 return (
                   <div 
                     key={index} 
-                    className="w-full rounded-lg border border-border overflow-hidden bg-muted/20"
+                    className="w-full rounded-lg border-2 border-primary/20 overflow-hidden bg-gradient-to-b from-muted/40 to-muted/20 shadow-xl"
                   >
-                    <div className="max-h-[600px] overflow-y-auto scrollbar-thin">
-                      <ImageWithFallback 
-                        src={image} 
-                        alt={`${title} - Image ${index + 1}`}
-                        className="w-full h-auto"
-                      />
+                    <div className="relative">
+                      <div className="sticky top-0 z-20 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-md px-4 py-2 border-b border-border/50 flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span className="animate-bounce">↓</span>
+                          <span>Scroll down to explore</span>
+                          <span className="animate-bounce">↓</span>
+                        </div>
+                      </div>
+                      <div 
+                        className="overflow-y-auto scrollbar-thin"
+                        style={{ 
+                          maxHeight: '600px',
+                          overflowY: 'auto',
+                          WebkitOverflowScrolling: 'touch'
+                        }}
+                      >
+                        <ImageWithFallback 
+                          src={image} 
+                          alt={`${title} - Image ${index + 1}`}
+                          className="w-full h-auto block"
+                          style={{ display: 'block', width: '100%', height: 'auto' }}
+                        />
+                      </div>
                     </div>
                   </div>
                 );
@@ -70,15 +93,26 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
               );
             })}
             {/* Grid container for non-long images */}
-            {images.filter(img => !img.includes('long-screenshot') && !img.includes('long')).length > 1 && (
+            {images.filter(img => {
+              const imgStr = String(img).toLowerCase();
+              return !imgStr.includes('long-screenshot') && !imgStr.includes('longscreenshot') && !imgStr.includes('anitrend-long');
+            }).length > 1 && (
               <div className={`grid gap-4 ${
-                images.filter(img => !img.includes('long-screenshot') && !img.includes('long')).length === 2 
+                images.filter(img => {
+                  const imgStr = String(img).toLowerCase();
+                  return !imgStr.includes('long-screenshot') && !imgStr.includes('longscreenshot') && !imgStr.includes('anitrend-long');
+                }).length === 2 
                   ? 'grid-cols-1 md:grid-cols-2' 
                   : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
               }`}>
                 {images.map((image, index) => {
-                  const isLongImage = image.includes('long-screenshot') || image.includes('long');
-                  const isIcon = image.includes('tool') || image.includes('icon') || image.includes('-tool');
+                  const imageStr = String(image).toLowerCase();
+                  const isLongImage = imageStr.includes('long-screenshot') || 
+                                      imageStr.includes('longscreenshot') ||
+                                      imageStr.includes('anitrend-long');
+                  const isIcon = imageStr.includes('tool') || 
+                               imageStr.includes('icon') || 
+                               imageStr.includes('-tool');
                   
                   // Skip long images (already rendered above)
                   if (isLongImage) return null;

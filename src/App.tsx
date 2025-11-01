@@ -1269,11 +1269,13 @@ export default function App() {
                       Anime Trends Explorer
                     </h4>
                     <div className="bg-muted/50 p-4 rounded-lg space-y-4">
-                      <ImageZoom 
-                        src={anitrendFeature1} 
-                        alt="AniTrend Trends Explorer - Popularity Chart" 
-                        className="rounded-lg border border-border w-full"
-                      />
+                      <div className="flex justify-center items-center p-4">
+                        <img 
+                          src={anitrendFeature1} 
+                          alt="AniTrend Trends Explorer Icon" 
+                          className="w-20 h-20 object-contain"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <p className="font-medium">Seasonal Insights</p>
                         <p className="text-muted-foreground text-sm">Explore trending anime by season and year with dynamic filters for Winter, Spring, Summer, and Fall.</p>
@@ -1293,11 +1295,13 @@ export default function App() {
                       Scene Finder
                     </h4>
                     <div className="bg-muted/50 p-4 rounded-lg space-y-4">
-                      <ImageZoom 
-                        src={anitrendFeature2} 
-                        alt="AniTrend Scene Finder - Image Recognition" 
-                        className="rounded-lg border border-border w-full"
-                      />
+                      <div className="flex justify-center items-center p-4">
+                        <img 
+                          src={anitrendFeature2} 
+                          alt="AniTrend Scene Finder Icon" 
+                          className="w-20 h-20 object-contain"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <p className="font-medium">Image Recognition</p>
                         <p className="text-muted-foreground text-sm">Upload an image or paste a URL to identify which anime a scene is from using trace.moe API.</p>
@@ -1321,11 +1325,13 @@ export default function App() {
                       Technical Highlights
                     </h4>
                     <div className="bg-muted/50 p-4 rounded-lg space-y-4">
-                      <ImageZoom 
-                        src={anitrendFeature3} 
-                        alt="AniTrend Technical Implementation" 
-                        className="rounded-lg border border-border w-full"
-                      />
+                      <div className="flex justify-center items-center p-4">
+                        <img 
+                          src={anitrendFeature3} 
+                          alt="AniTrend Technical Implementation Icon" 
+                          className="w-20 h-20 object-contain"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
                           <li><strong>trace.moe API:</strong> Accurate scene detection with episode and timestamp matching</li>
