@@ -1485,13 +1485,13 @@ export default function App() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Button size="lg" asChild>
-              <a href="mailto:your.email@example.com">
+              <a href="mailto:rajatpalsinghsodhi@gmail.com">
                 <Mail className="mr-2 w-5 h-5" />
                 Email Me
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/rajatpal-sodhi-b88bab22b" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="mr-2 w-5 h-5" />
                 LinkedIn
               </a>
