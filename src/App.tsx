@@ -38,6 +38,7 @@ import anitrendFeature1 from "./assets/anitrend-feature1.png";
 import anitrendFeature2 from "./assets/anitrend-feature2.png";
 import anitrendFeature3 from "./assets/anitrend-feature3.png";
 import anitrendLongScreenshot from "./assets/anitrend-long-screenshot.png";
+import anitrendScreenshot from "./assets/anitrend-screenshot.png";
 
 // Tool logos - add these images to /images folder with these exact names:
 // - jikan-api.png
@@ -1390,7 +1391,7 @@ export default function App() {
             <ProcessStep 
               title="3. Data Visualization Development"
               description="Built two interactive D3.js visualizations for the Trends Explorer. The horizontal bar chart displays anime popularity rankings with animated transitions, gradient-filled bars, and tooltips. The donut chart shows genre distribution with expandable segments on hover, dynamic legends, and center total counts."
-              images={[anitrendLongScreenshot, anitrendFeature1, anitrendFeature2, anitrendFeature3]}
+              images={[anitrendScreenshot, anitrendLongScreenshot, anitrendFeature1, anitrendFeature2, anitrendFeature3]}
               content={
                 <div className="space-y-4">
                   <div className="bg-muted/50 p-6 rounded-lg">
