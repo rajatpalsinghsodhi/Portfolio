@@ -108,7 +108,7 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
 
             {/* Render icons as small centered icons */}
             {iconImages.length > 0 && (
-              <div className="flex flex-wrap gap-4 justify-center items-center p-4 bg-muted/20 rounded-lg border border-border">
+              <div className="flex flex-wrap gap-4 justify-center items-center">
                 {iconImages.map((image, index) => (
                   <div 
                     key={`icon-${index}`}
@@ -125,7 +125,7 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
               </div>
             )}
 
-            {/* Render regular images in a grid */}
+            {/* Render regular images in a grid - smaller size */}
             {regularImages.length > 0 && (
               <div className={`grid gap-4 ${
                 regularImages.length === 1 
@@ -137,12 +137,12 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
                 {regularImages.map((image, index) => (
                   <div 
                     key={`regular-${index}`}
-                    className="rounded-lg overflow-hidden border border-border"
+                    className="rounded-lg overflow-hidden border border-border flex justify-center"
                   >
                     <ImageWithFallback 
                       src={image} 
                       alt={`${title} - Image ${index + 1}`}
-                      className="w-full h-auto object-cover"
+                      className="max-w-2xl w-full h-auto object-contain"
                     />
                   </div>
                 ))}
