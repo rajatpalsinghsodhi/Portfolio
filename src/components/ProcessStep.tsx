@@ -30,10 +30,13 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
               const isLongImage = imageStr.toLowerCase().includes('long-screenshot') || 
                                   imageStr.toLowerCase().includes('longscreenshot') ||
                                   imageStr.toLowerCase().includes('anitrend-long');
-              // Check if image is an icon/tool (contains "tool" in path/filename)
+              // Check if image is an icon/tool (contains "tool", "feature", or "icon" in path/filename)
+              // Feature images are also icons (they're small icon files, not screenshots)
               const isIcon = imageStr.toLowerCase().includes('tool') || 
+                           imageStr.toLowerCase().includes('feature') ||
                            imageStr.toLowerCase().includes('icon') || 
-                           imageStr.toLowerCase().includes('-tool');
+                           imageStr.toLowerCase().includes('-tool') ||
+                           imageStr.toLowerCase().includes('-feature');
               
               // For long images, render in full-width scrollable container
               if (isLongImage) {
@@ -111,8 +114,10 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
                                       imageStr.includes('longscreenshot') ||
                                       imageStr.includes('anitrend-long');
                   const isIcon = imageStr.includes('tool') || 
+                               imageStr.includes('feature') ||
                                imageStr.includes('icon') || 
-                               imageStr.includes('-tool');
+                               imageStr.includes('-tool') ||
+                               imageStr.includes('-feature');
                   
                   // Skip long images (already rendered above)
                   if (isLongImage) return null;
