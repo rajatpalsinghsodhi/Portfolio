@@ -1397,7 +1397,7 @@ export default function App() {
             <ProcessStep 
               title="3. Data Visualization Development"
               description="Built two interactive D3.js visualizations for the Trends Explorer. The horizontal bar chart displays anime popularity rankings with animated transitions, gradient-filled bars, and tooltips. The donut chart shows genre distribution with expandable segments on hover, dynamic legends, and center total counts."
-              images={[anitrendScreenshot, anitrendLongScreenshot, anitrendFeature1, anitrendFeature2, anitrendFeature3]}
+              images={[anitrendLongScreenshot, anitrendScreenshot, anitrendFeature1, anitrendFeature2, anitrendFeature3]}
               content={
                 <div className="space-y-4">
                   <div className="bg-muted/50 p-6 rounded-lg">
