@@ -23,15 +23,27 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
         
         {images && images.length > 0 && (
           <div className={`grid gap-4 mb-6 ${images.length === 1 ? 'grid-cols-1' : images.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
-            {images.map((image, index) => (
-              <div key={index} className="rounded-lg overflow-hidden border border-border">
-                <ImageWithFallback 
-                  src={image} 
-                  alt={`${title} - Image ${index + 1}`}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            ))}
+            {images.map((image, index) => {
+              // Check if image is marked as long (contains "long" in filename or is anitrend-long-screenshot)
+              const isLongImage = image.includes('long-screenshot') || image.includes('long');
+              
+              return (
+                <div 
+                  key={index} 
+                  className={`rounded-lg overflow-hidden border border-border ${
+                    isLongImage 
+                      ? 'max-h-[600px] overflow-y-auto scrollbar-thin' 
+                      : ''
+                  }`}
+                >
+                  <ImageWithFallback 
+                    src={image} 
+                    alt={`${title} - Image ${index + 1}`}
+                    className={`w-full ${isLongImage ? 'h-auto' : 'h-auto object-cover'}`}
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
 
