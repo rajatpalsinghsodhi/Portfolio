@@ -31,6 +31,23 @@ import moodboard3 from "figma:asset/2386ceab0de3a2aea460ebe9be6058f516d31afe.png
 import moodboard4 from "figma:asset/abbc836bf404629aa5099c6287f593561da3b675.png";
 import profilePhoto from "figma:asset/9acbba2f44a1f99786c2e7cd5b80c5130593c9b7.png";
 import anitrendMain from "./assets/anitrend-main.png";
+import anitrendTool1 from "./assets/anitrend-tool1.png";
+import anitrendTool2 from "./assets/anitrend-tool2.png";
+import anitrendTool3 from "./assets/anitrend-tool3.png";
+import anitrendFeature1 from "./assets/anitrend-feature1.png";
+import anitrendFeature2 from "./assets/anitrend-feature2.png";
+import anitrendFeature3 from "./assets/anitrend-feature3.png";
+
+// Tool logos - add these images to /images folder with these exact names:
+// - jikan-api.png
+// - tracemoe-api.png  
+// - anilist-api.png
+// - cursor-ai.png
+// Using imported tool images directly
+const jikanApiLogo = anitrendTool2;
+const traceMoeLogo = anitrendTool1;
+const anilistLogo = anitrendTool3;
+const cursorAiLogo: string | null = null; // Keep icon fallback for Cursor AI
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -1186,25 +1203,41 @@ export default function App() {
                         
                         {/* trace.moe API */}
                         <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
-                          <Globe className="w-5 h-5 text-primary" />
+                          {traceMoeLogo ? (
+                            <img src={traceMoeLogo} alt="trace.moe API" className="w-5 h-5 object-contain" />
+                          ) : (
+                            <Globe className="w-5 h-5 text-primary" />
+                          )}
                           <span className="text-sm font-medium">trace.moe API</span>
                         </div>
                         
                         {/* Jikan API */}
                         <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
-                          <Globe className="w-5 h-5 text-primary" />
+                          {jikanApiLogo ? (
+                            <img src={jikanApiLogo} alt="Jikan API" className="w-5 h-5 object-contain" />
+                          ) : (
+                            <Globe className="w-5 h-5 text-primary" />
+                          )}
                           <span className="text-sm font-medium">Jikan API</span>
                         </div>
                         
                         {/* AniList API */}
                         <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
-                          <Globe className="w-5 h-5 text-primary" />
+                          {anilistLogo ? (
+                            <img src={anilistLogo} alt="AniList API" className="w-5 h-5 object-contain" />
+                          ) : (
+                            <Globe className="w-5 h-5 text-primary" />
+                          )}
                           <span className="text-sm font-medium">AniList API</span>
                         </div>
 
                         {/* Cursor AI */}
                         <div className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg">
-                          <Sparkles className="w-5 h-5 text-primary" />
+                          {cursorAiLogo ? (
+                            <img src={cursorAiLogo} alt="Cursor AI" className="w-5 h-5 object-contain" />
+                          ) : (
+                            <Sparkles className="w-5 h-5 text-primary" />
+                          )}
                           <span className="text-sm font-medium">Cursor AI</span>
                         </div>
                       </div>
@@ -1224,15 +1257,22 @@ export default function App() {
                       <TrendingUp className="w-5 h-5 text-primary" />
                       Anime Trends Explorer
                     </h4>
-                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                      <p className="font-medium">Seasonal Insights</p>
-                      <p className="text-muted-foreground text-sm">Explore trending anime by season and year with dynamic filters for Winter, Spring, Summer, and Fall.</p>
-                      
-                      <p className="font-medium mt-3">Interactive Visualizations</p>
-                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
-                        <li><strong>Popularity Bar Chart:</strong> Shows top anime by fan engagement with animated, gradient-filled bars</li>
-                        <li><strong>Genre Donut Chart:</strong> Reveals dominant genres with hover interactions and dynamic legends</li>
-                      </ul>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-4">
+                      <ImageZoom 
+                        src={anitrendFeature1} 
+                        alt="AniTrend Trends Explorer - Popularity Chart" 
+                        className="rounded-lg border border-border w-full"
+                      />
+                      <div className="space-y-2">
+                        <p className="font-medium">Seasonal Insights</p>
+                        <p className="text-muted-foreground text-sm">Explore trending anime by season and year with dynamic filters for Winter, Spring, Summer, and Fall.</p>
+                        
+                        <p className="font-medium mt-3">Interactive Visualizations</p>
+                        <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                          <li><strong>Popularity Bar Chart:</strong> Shows top anime by fan engagement with animated, gradient-filled bars</li>
+                          <li><strong>Genre Donut Chart:</strong> Reveals dominant genres with hover interactions and dynamic legends</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
@@ -1241,19 +1281,26 @@ export default function App() {
                       <Search className="w-5 h-5 text-primary" />
                       Scene Finder
                     </h4>
-                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                      <p className="font-medium">Image Recognition</p>
-                      <p className="text-muted-foreground text-sm">Upload an image or paste a URL to identify which anime a scene is from using trace.moe API.</p>
-                      
-                      <p className="font-medium mt-3">Precise Results</p>
-                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
-                        <li>Exact episode number and timestamp</li>
-                        <li>Similarity percentage indicating match confidence</li>
-                        <li>Video preview of the matched scene</li>
-                        <li>Rich metadata: rating, rank, popularity, airing status, duration</li>
-                        <li>Character grid with images and roles</li>
-                        <li>Similar anime recommendations with tags</li>
-                      </ul>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-4">
+                      <ImageZoom 
+                        src={anitrendFeature2} 
+                        alt="AniTrend Scene Finder - Image Recognition" 
+                        className="rounded-lg border border-border w-full"
+                      />
+                      <div className="space-y-2">
+                        <p className="font-medium">Image Recognition</p>
+                        <p className="text-muted-foreground text-sm">Upload an image or paste a URL to identify which anime a scene is from using trace.moe API.</p>
+                        
+                        <p className="font-medium mt-3">Precise Results</p>
+                        <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                          <li>Exact episode number and timestamp</li>
+                          <li>Similarity percentage indicating match confidence</li>
+                          <li>Video preview of the matched scene</li>
+                          <li>Rich metadata: rating, rank, popularity, airing status, duration</li>
+                          <li>Character grid with images and roles</li>
+                          <li>Similar anime recommendations with tags</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
@@ -1262,15 +1309,22 @@ export default function App() {
                       <Sparkles className="w-5 h-5 text-primary" />
                       Technical Highlights
                     </h4>
-                    <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                      <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
-                        <li><strong>trace.moe API:</strong> Accurate scene detection with episode and timestamp matching</li>
-                        <li><strong>Jikan API:</strong> Comprehensive anime metadata including ratings, characters, and recommendations</li>
-                        <li><strong>AniList GraphQL API:</strong> Seasonal anime data for trends visualization</li>
-                        <li><strong>D3.js Visualizations:</strong> Responsive bar charts and donut charts with smooth animations</li>
-                        <li><strong>Fully Responsive:</strong> Adapts seamlessly to desktop, tablet, and mobile devices</li>
-                        <li><strong>Cursor AI Integration:</strong> Development support, real-time code suggestions, and debugging assistance</li>
-                      </ul>
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-4">
+                      <ImageZoom 
+                        src={anitrendFeature3} 
+                        alt="AniTrend Technical Implementation" 
+                        className="rounded-lg border border-border w-full"
+                      />
+                      <div className="space-y-2">
+                        <ul className="list-disc list-outside space-y-1 text-muted-foreground text-sm pl-5">
+                          <li><strong>trace.moe API:</strong> Accurate scene detection with episode and timestamp matching</li>
+                          <li><strong>Jikan API:</strong> Comprehensive anime metadata including ratings, characters, and recommendations</li>
+                          <li><strong>AniList GraphQL API:</strong> Seasonal anime data for trends visualization</li>
+                          <li><strong>D3.js Visualizations:</strong> Responsive bar charts and donut charts with smooth animations</li>
+                          <li><strong>Fully Responsive:</strong> Adapts seamlessly to desktop, tablet, and mobile devices</li>
+                          <li><strong>Cursor AI Integration:</strong> Development support, real-time code suggestions, and debugging assistance</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1326,6 +1380,7 @@ export default function App() {
             <ProcessStep 
               title="3. Data Visualization Development"
               description="Built two interactive D3.js visualizations for the Trends Explorer. The horizontal bar chart displays anime popularity rankings with animated transitions, gradient-filled bars, and tooltips. The donut chart shows genre distribution with expandable segments on hover, dynamic legends, and center total counts."
+              images={[anitrendFeature1, anitrendFeature2, anitrendFeature3]}
               content={
                 <div className="space-y-4">
                   <div className="bg-muted/50 p-6 rounded-lg">
