@@ -18,23 +18,36 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
     const regularImages: string[] = [];
 
     images.forEach((image) => {
+      // Convert to string and check both the path and the variable name
       const imageStr = String(image).toLowerCase();
       
-      // Check for long screenshot - check for patterns in hashed filenames too
-      // Built assets will be like: anitrend-long-screenshot-MF6FCXOJ.png
-      // So we check for "long" + "screenshot" appearing together or separately
-      const isLong = imageStr.includes('long-screenshot') || 
-                     imageStr.includes('longscreenshot') ||
-                     (imageStr.includes('long') && imageStr.includes('screenshot')) ||
-                     imageStr.includes('anitrend-long');
+      // In production, paths look like: /Portfolio/assets/anitrend-tool3-DydBbKXE.png
+      // In dev, might be relative paths or module references
+      // We need to check the actual path string that gets rendered
       
-      // Check for icons (tool or feature images) - these are small icon files
-      const isIcon = imageStr.includes('tool') || 
-                     imageStr.includes('feature') ||
-                     imageStr.includes('icon') ||
-                     imageStr.includes('-tool') ||
-                     imageStr.includes('-feature');
+      // Check for long screenshot FIRST (priority check)
+      // Look for patterns in built/hashed filenames
+      const hasLong = imageStr.includes('long-screenshot') || 
+                      imageStr.includes('longscreenshot');
+      const hasLongAndScreenshot = imageStr.includes('long') && imageStr.includes('screenshot');
+      const hasAnitrendLong = imageStr.includes('anitrend-long');
+      
+      const isLong = hasLong || hasLongAndScreenshot || hasAnitrendLong;
+      
+      // Check for icons (tool or feature images) - these are SMALL icon files
+      // Production paths: /Portfolio/assets/anitrend-tool3-DydBbKXE.png
+      // MUST catch: anitrend-tool1, anitrend-tool2, anitrend-tool3, anitrend-feature1, etc.
+      // Use multiple checks to ensure we catch them
+      const hasTool = imageStr.includes('tool') || imageStr.indexOf('tool') !== -1;
+      const hasFeature = imageStr.includes('feature') || imageStr.indexOf('feature') !== -1;
+      const hasIcon = imageStr.includes('icon') || imageStr.indexOf('icon') !== -1;
+      
+      // Force icon detection - ANY mention of tool/feature/icon = icon
+      // Also check for patterns like "tool1", "feature2", "tool-3", etc.
+      const hasToolFeaturePattern = /tool\d|feature\d|tool-\d|feature-\d/i.test(imageStr);
+      const isIcon = hasTool || hasFeature || hasIcon || hasToolFeaturePattern;
 
+      // Priority: long images > icons > regular
       if (isLong) {
         longImages.push(image);
       } else if (isIcon) {
@@ -99,12 +112,13 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
                 {iconImages.map((image, index) => (
                   <div 
                     key={`icon-${index}`}
-                    className="flex items-center justify-center p-2 bg-background rounded-lg border border-border/50"
+                    className="flex items-center justify-center p-3 bg-background rounded-lg border border-border/50 shadow-sm"
                   >
                     <ImageWithFallback 
                       src={image} 
                       alt={`${title} - Icon ${index + 1}`}
                       className="w-16 h-16 object-contain"
+                      style={{ maxWidth: '64px', maxHeight: '64px', width: 'auto', height: 'auto' }}
                     />
                   </div>
                 ))}
