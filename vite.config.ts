@@ -4,7 +4,7 @@
   import path from 'path';
 
 export default defineConfig({
-  base: '/Portfolio/',
+  base: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '/',
   plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

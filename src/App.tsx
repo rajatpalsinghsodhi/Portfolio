@@ -13,7 +13,7 @@ import { IterationDocumentation } from "./components/IterationDocumentation";
 import { Citations } from "./components/Citations";
 import D31 from "./imports/D31";
 import Frame85 from "./imports/Frame85";
-import { Menu, X, Mail, Linkedin, ArrowRight, Lightbulb, Users, Palette, TrendingUp, BarChart3, RefreshCw, Smartphone, ChevronDown, ChevronUp, Search, Film, Sparkles, Globe } from "lucide-react";
+import { Menu, X, Mail, Linkedin, ArrowRight, Lightbulb, Users, Palette, TrendingUp, BarChart3, RefreshCw, Smartphone, ChevronDown, ChevronUp, Search, Film, Sparkles, Globe, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import cryptoImage1 from "figma:asset/c9339c3ec67882a71f5353a9c36e1cae23408dcc.png";
 import cryptoDetailView from "figma:asset/45a93cfd776fce778c7aea2c5f5af85770800dca.png";
@@ -1242,6 +1242,15 @@ export default function App() {
                           <span className="text-sm font-medium">Cursor AI</span>
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-6">
+                      <h4 className="mb-3">Live Link</h4>
+                      <Button asChild variant="outline" className="w-full md:w-auto">
+                        <a href="https://public--main--p32025--sodhraja.ixdcoder.com/" target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 w-4 h-4" />
+                          View Live Project
+                        </a>
+                      </Button>
                     </div>
                   </div>
                 </div>
