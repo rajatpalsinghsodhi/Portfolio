@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { VideoPlayer } from "./VideoPlayer";
+import { DeviceMockup } from "./DeviceMockup";
 
 interface ProcessStepProps {
   title: string;
@@ -125,26 +126,16 @@ export function ProcessStep({ title, description, images, videos, content }: Pro
               </div>
             )}
 
-            {/* Render regular images in a grid - smaller size */}
+            {/* Render regular images in phone containers */}
             {regularImages.length > 0 && (
-              <div className={`grid gap-4 ${
-                regularImages.length === 1 
-                  ? 'grid-cols-1' 
-                  : regularImages.length === 2 
-                    ? 'grid-cols-1 md:grid-cols-2' 
-                    : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-              }`}>
+              <div className="flex flex-wrap gap-6 justify-center">
                 {regularImages.map((image, index) => (
-                  <div 
+                  <DeviceMockup 
                     key={`regular-${index}`}
-                    className="rounded-lg overflow-hidden border border-border flex justify-center"
-                  >
-                    <ImageWithFallback 
-                      src={image} 
-                      alt={`${title} - Image ${index + 1}`}
-                      className="max-w-2xl w-full h-auto object-contain"
-                    />
-                  </div>
+                    src={image}
+                    alt={`${title} - Image ${index + 1}`}
+                    device="mobile"
+                  />
                 ))}
               </div>
             )}
